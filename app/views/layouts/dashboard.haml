@@ -1,0 +1,65 @@
+%html
+  %head
+    = stylesheet_link_tag  'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+    %title Cyberbeacon
+  = csrf_meta_tags
+  %body
+    .wrapper
+      %nav.navbar.navbar-default.navbar-static-top{ role: "navigation", style:"margin-bottom: 0" }
+        .navbar-header
+          %button.navbar-toggle{ type:"button", "data-toggle" => "collapse", "data-target" => ".navbar-collapse" }
+            %span.sr-only Toggle navigation
+            %span.icon-bar
+            %span.icon-bar
+            %span.icon-bar
+          %a.navbar-brand{ href: "#" } Cyberbeacon
+        %ul.nav.navbar-top-links.navbar-right
+          %li.dropdown
+            %a.dropdown-toggle{ "data-toggle" => "dropdown", href: "#" }
+              %i.fa.fa-user.fa-fw
+              %i.fa.fa-caret-down
+            %ul.dropdown-menu.dropdown-user
+              %li
+                =link_to(user_path(current_user)) do
+                  %i.fa.fa-user.fa-fw
+                  User Profile
+              %li
+                %a{ href: "#" }
+                  %i.fa.fa-gear.fa-fw
+                  Settings
+              %li.divider
+              %li
+                =link_to(destroy_user_session_path, :method => :delete) do
+                  %i.fa.fa-sign-out.fa-fw
+                  Logout
+
+        .navbar-default.sidebar{ role: "navigation"}
+          .sidebar-nav.navbar-collapse
+            %ul.nav#side-menu
+              %li
+                %a{ href: '/' }
+                  %i.fa.fa-dashboard.fa-fw
+                  Dashboard
+              %li
+                =link_to devices_path do
+                  %i.fa.fa-hdd-o.fa-fw
+                  Devices
+              %li
+                =link_to appliances_path do
+                  %i.fa.fa-hdd-o.fa-fw
+                  Appliances
+              -if current_user.admin?
+                %li
+                  =link_to users_path do
+                    %i.fa.fa-user.fa-fw
+                    Users
+
+
+
+    #page-wrapper
+      - if notice
+        %p.alert.alert-success #{notice}
+      -if alert
+        %p.alert.alert-danger #{alert}
+      = yield

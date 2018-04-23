@@ -1,0 +1,20 @@
+.row
+  .col-lg-12
+    %h1.page-header Appliance: #{@appliance.name}
+.row
+  .col-lg-5
+    .table-responsive
+      %table.table.table-striped
+        %tbody
+          %tr
+            %td ID:
+            %td #{@appliance.id}
+          %tr
+            %td Description:
+            %td #{@appliance.description}
+          %tr
+            %td Status:
+            %td #{@appliance.status}
+          %tr
+            %td Verified:
+            %td #{@appliance.verified}

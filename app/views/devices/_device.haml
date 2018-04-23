@@ -1,0 +1,7 @@
+%tr
+  %td
+    =link_to device.name, device_path(device)
+  %td
+    = button_to device_path(device), method: :delete, remote: true, :class => 'btn btn-danger btn-circle' do
+      %i.fa.fa-trash-o
+

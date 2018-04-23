@@ -1,0 +1,21 @@
+
+:javascript
+  function getData(state, msg) {
+    if (msg !== '')
+      return msg;
+
+    data = 'Device has been shared.';
+    if (state != 'success')
+      data = 'Something went wrong.';
+
+    return data;
+  }
+
+  function getState(state) {
+    if (state != 'success')
+      state = 'danger'
+    return state
+  }
+  toggleMessage('#sharing_message', getState('#{@state}'), getData('#{@state}', '#{@message}'))
+  $('input#email').val('');
+

@@ -1,0 +1,26 @@
+%html
+  %head
+    = stylesheet_link_tag  'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+    %title Cyberbeacon
+  = csrf_meta_tag
+  %body
+
+    .container
+      .row
+        .col-md-4.col-md-offset-4
+          .login-panel.panel.panel-default
+            .panel-heading
+              .panel-title Please Sign In
+            .panel-body
+              %form{ role: "form" }
+                %fieldset
+                  .form-group
+                    %input.form-control{ placeholder: "E-mail", name: "email", type: "email", autofocus: true }
+                  .form-group
+                    %input.form-control{ placeholder: "Password", name: "password", type: "password", value:"" }
+                  .checkbox
+                    %input{ name: "remember", type: "checkbox", value: "Remember Me"} Remember Me
+                    %button.btn.btn-lg.btn-success.btn-block Login
+
+

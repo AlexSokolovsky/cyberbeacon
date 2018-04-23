@@ -1,0 +1,30 @@
+.row
+  .col-lg-12
+    %h1.page-header Add new Action
+
+.row
+  .col-lg-5
+    %h2 Select appliance:
+    .form-group
+      %label Appliance:
+      %select.form-control{ id: 'appliance', onchange: 'openWS()' }
+        - current_user.appliances.each do |appliance|
+          %option{ value: "#{appliance.id}" } #{appliance.name}
+
+    %h2 Add new device action:
+    =form_for @device_action, url: device_device_actions_path(@device), :html => {:role => "form"} do |f|
+      %fieldset
+        .form-group
+          = f.label 'Action Name:'
+          = f.text_field :name, class: 'form-control'
+        .form-group
+          = f.label 'Code:'
+          = f.text_field :code, id: 'message', class: 'form-control'
+        = f.submit "Submit", :class => 'btn btn-default'
+
+:javascript
+  function openWS(){
+    var ws = new WebSocket("ws://#{ENV['HOST_IP']}/appliances/" + document.getElementById('appliance').value + "/connect?user_id=#{current_user.id}");
+    ws.onmessage = function(m) { document.getElementById('message').value = m.data };
+  };
+  openWS();

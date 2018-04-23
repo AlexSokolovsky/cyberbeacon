@@ -1,0 +1,19 @@
+.row
+  .col-lg-12
+    %h1.page-header User's Appliances
+.row
+  .col-lg-5
+    .panel-body
+      .table-responsive
+        #appliances
+          %table.table
+            %thead
+              %tr
+                %th Appliance Name
+                %th Action
+                %th Verify
+            %tbody
+              = render partial: "appliance", collection: current_user.appliances
+
+=link_to 'Add new Appliance', new_appliance_path, :class => 'btn btn-primary'
+

@@ -1,0 +1,27 @@
+.table-responsive
+  %table.table.table-striped
+    %thead
+      %th Action Name
+      %th Action code
+      %th Actions
+    %tbody
+    - @device.device_actions.each do |action|
+      %tr
+        %td #{truncate(action[:name], length: 10)}
+        %td #{truncate(action[:code], length: 20)}
+        %td
+          %p
+            %div{style: 'display:inline-block'}
+              = button_to device_device_action_path(@device,action), :method => :delete, remote: true, :class => 'btn btn-danger btn-circle' do
+                %i.fa.fa-trash-o
+
+            =form_tag forward_device_path(@device), remote: true, :id => 'send', style: 'display:inline-block' do
+              = hidden_field_tag :code, action[:code]
+              = submit_tag "Send", :class => 'btn btn-primary'
+
+    %tr
+      %td{ colspan: 2 }  Custom action
+      %td
+        =form_tag custom_device_path(@device), remote: true do
+          = submit_tag "Send", :class => 'btn btn-primary'
+

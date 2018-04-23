@@ -1,0 +1,39 @@
+.row
+  .col-lg-12
+    %h1.page-header Device: #{@device.name}
+.row
+  .col-lg-5
+    .table-responsive
+      %table.table.table-striped
+        %tbody
+          %tr
+            %td Description:
+            %td #{@device.description}
+          %tr
+            %td Appliances:
+            %td #{@device.appliances.map(&:name).join(', ')}
+          - if shared?(@device.id)
+            %tr
+              %td Shared:
+              %td true
+.row
+  .col-lg-5
+    .panel.panel-default
+      .panel-heading Sharing
+      .panel-body
+        #sharing_message
+        %div{style: 'display:inline-block'}
+          =form_tag share_device_path(@device), remote: true, style: 'display:inline-block' do
+            = label_tag "User's email:"
+            = email_field_tag :email
+            = submit_tag "Share", :class => 'btn btn-primary'
+.row
+  .col-lg-5
+    .panel.panel-default
+      .panel-heading Saved actions
+      .panel-body
+        #forward_message
+        #saved_actions
+          =render 'device_actions'
+
+    =link_to 'Add new Action', new_device_device_action_path(@device), :class => 'btn btn-primary'

@@ -1,0 +1,24 @@
+.row
+  .col-lg-12
+    %h1.page-header Add new Appliance
+
+    -if @error
+      .alert alert-danger #{@error}
+.row
+  .col-lg-5
+    =form_for @appliance, :html => {:role => "form"} do |f|
+      %fieldset
+        .form-group
+          = f.label 'Name:'
+          = f.text_field :name, id: 'name', class: 'form-control'
+        .form-group
+          = f.label 'Description:'
+          = f.text_field :description, class: 'form-control'
+        .form-group
+          = f.label 'DeviceID:'
+          = f.text_field :id, class: 'form-control'
+        %span.text-muted.small
+          %em Note: in order to add new appliance please keep buttom 1 pressed
+        %br
+
+        = f.submit "Submit", :class => 'btn btn-default'

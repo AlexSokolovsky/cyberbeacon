@@ -1,0 +1,24 @@
+.row
+  .col-lg-12
+    %h1.page-header Add new Device
+
+    -if @error
+      .alert alert-danger #{@error}
+.row
+  .col-lg-5
+    =form_for @device, :html => {:role => "form"} do |f|
+      %fieldset
+        .form-group
+          = f.label 'Name:'
+          = f.text_field :name, id: 'name', class: 'form-control'
+        .form-group
+          = f.label 'Description:'
+          = f.text_field :description, class: 'form-control'
+        .form-group
+          = f.label 'Assign Appliances'
+          = f.select :appliance_ids, options_for_select(current_user.appliances.map{|a| [a.name, a.id]}), {include_hidden: false}, { multiple: "true" }
+
+        = f.submit "Submit", :class => 'btn btn-default'
+
+:javascript
+  $('#device_appliance_ids').multiSelect()

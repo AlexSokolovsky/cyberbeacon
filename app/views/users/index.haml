@@ -1,0 +1,24 @@
+.row
+  .col-lg-12
+    %h1.page-header Users
+.row
+  .col-lg-5
+    .panel-body
+      .table-responsive
+        %table.table
+          %thead
+            %tr
+              %th
+                User Name
+              %th
+                Action
+          %tbody
+          - @users.each do |user|
+            %tr
+              %td
+                =link_to  user.email, user_path(user)
+              %td
+                = button_to user_path(user), :method => :delete, :class => 'btn btn-danger btn-circle' do
+                  %i.fa.fa-trash-o
+
+

@@ -1,0 +1,80 @@
+.row
+  .col-lg-12
+    %h1.page-header Dashboard
+
+.row
+  .col-lg-5.col-md-6
+    .panel.panel-primary
+      .panel-heading
+        .row
+          .col-xs-3
+            %i.fa.fa-hdd-o.fa-5x
+          .col-xs-9.text-right
+            .huge
+              = current_user.all_devices.size
+            %div Devices
+      =link_to new_device_path do
+        .panel-footer
+          %span.pull-left Add new Device
+          .pull-right
+            %i.fa.fa-arrow-circle-right
+          .clearfix
+  .col-lg-5.col-md-6
+    .panel.panel-green
+      .panel-heading
+        .row
+          .col-xs-3
+            %i.fa.fa-hdd-o.fa-5x
+          .col-xs-9.text-right
+            .huge
+              = current_user.appliances.size
+            %div Appliances
+      =link_to new_appliance_path do
+        .panel-footer
+          %span.pull-left Add new Appliance
+          .pull-right
+            %i.fa.fa-arrow-circle-right
+          .clearfix
+
+.row
+  -devices = current_user.all_devices
+  -unless devices.empty?
+
+    .col-lg-5
+      .panel.panel-default
+        .panel-heading
+          %i.fa.fa-hdd-o.fa-fw
+          My devices
+        .panel-body
+          .table-responsive
+            %table.table
+              %thead
+              %tr
+                %th
+                  Device Name
+                %th
+                  Action
+              %tbody
+                = render partial: "devices/device", collection: devices
+
+  -appliances = current_user.appliances
+  -unless appliances.empty?
+    .col-lg-5
+      .panel.panel-default
+        .panel-heading
+          %i.fa.fa-hdd-o.fa-fw
+          My Appliances
+        .panel-body
+          .table-responsive
+            %table.table
+              %thead
+              %tr
+                %th
+                  Appliance Name
+                %th
+                  Action
+                %th
+                  Verify
+              %tbody
+                = render partial: "appliances/appliance", collection: appliances
+

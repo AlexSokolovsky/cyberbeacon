@@ -1,0 +1,17 @@
+.row
+  .col-lg-12
+    %h1.page-header User's Devices
+.row
+  .col-lg-5
+    .panel-body
+      .table-responsive
+        #devices
+          %table.table
+            %thead
+              %tr
+                %th Device Name
+                %th Action
+            %tbody
+              = render partial: "device", collection: current_user.all_devices
+
+=link_to 'Add new Device', new_device_path, :class => 'btn btn-primary'

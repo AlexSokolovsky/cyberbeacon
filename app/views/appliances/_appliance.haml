@@ -1,0 +1,13 @@
+%tr
+  %td
+    = link_to appliance.name, appliance_path(appliance)
+  %td
+    = button_to appliance_path(appliance), :method => :delete, remote: true, :class => 'btn btn-danger btn-circle' do
+      %i.fa.fa-trash-o
+  %td
+    - if appliance.verified
+      Verified
+    - else
+      = button_to verify_appliance_path(appliance), :method => :post, :class => 'btn btn-success btn-circle' do
+        %i.fa.fa-check
+

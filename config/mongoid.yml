@@ -1,0 +1,12 @@
+development:
+  options:
+    raise_not_found_error: false
+  clients:
+    default:
+      database: cyberbeacon
+      hosts:
+        - localhost:27017
+production:
+  clients:
+    default:
+      uri: <%= ENV['MONGODB_URI'] %>
